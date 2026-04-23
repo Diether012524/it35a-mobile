@@ -1,25 +1,47 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from "@ionic/react";
-import { search } from "ionicons/icons";
 
-const Search: React.FC = () => {
-   return(
-    <IonPage>
-        <IonHeader>
-            <IonToolbar>
-                <IonButtons>
-                    <IonMenuButton>
-                    </IonMenuButton>               
-                <IonTitle>Search</IonTitle>
-           </IonButtons>
-            </IonToolbar>
-        </IonHeader>
-        <IonContent className="ion-padding" >
-            <h1>Search</h1>
-        </IonContent>
-    </IonPage>
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonSearchbar, IonItem } from '@ionic/react';
+import { useState } from 'react';
 
-   );
+const Search: React.FC = () =>{
+ 
+    const data = [
+   'Pokémon Yellow',
+    'Mega Man X',
+     'The Legend of Zelda',
+      'Pac-Man',
+       'Super Mario World',
+    'Labis gwapo',
+    
+  ];
+  let [results, setResults] = useState([...data]);
 
-}
+  const handleInput = (event: Event) => {
+    let query = '';
+    const target = event.target as HTMLIonSearchbarElement;
+    if (target) query = target.value!.toLowerCase();
 
+    setResults(data.filter((d) => d.toLowerCase().indexOf(query) > -1));
+  };
+
+      return(
+           <IonPage>
+              <IonHeader>
+                  <IonToolbar>
+                    <IonButtons>
+                    <IonMenuButton></IonMenuButton>
+                     <IonTitle>Search</IonTitle>
+                  </IonButtons>
+                </IonToolbar>
+                <IonSearchbar debounce={1000} onIonInput={(event) => handleInput(event)}></IonSearchbar>
+              </IonHeader>
+               <IonContent className="ion-padding">
+                 {results.map((result) => (
+                 <IonItem>{result}</IonItem>
+                ))}
+                
+              </IonContent>
+              </IonPage>
+      );
+
+};
 export default Search;
