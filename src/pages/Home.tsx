@@ -9,9 +9,10 @@ import { bookOutline, search, star } from "ionicons/icons";
 const Home: React.FC = () => {
 
     const tabs = [
+
       {name:'Feed',tab:'feed',url:'/app/home/feed',icon:bookOutline},
       {name:'Search',tab:'search',url:'/app/home/search',icon:search},
-      {name:'Favorites',tab:'favorites',url:'/app/home/favorites',icon:star},
+      {name:'Favorites',tab:'favorites',url:'/app/home/favorite',icon:star},
     ]
 
    return (
@@ -37,7 +38,7 @@ const Home: React.FC = () => {
              <Redirect to="/app/home/feed" />
              </Route>
               <Route exact path="/app/home/search" component={Search} />
-                <Route exact path="/app/home/favorites" component={Favorites} />
+                <Route exact path="/app/home/favorite" component={Favorites} />
         </IonRouterOutlet>
         </IonTabs>
       </IonReactRouter>   
